@@ -14,6 +14,7 @@ public class Main {
 
         String result = Poisk.poiskfio(fio);
 
+        //  System.out.print(url);
         System.out.println("Найдены сайты" + result);
 	// write your code here
     }

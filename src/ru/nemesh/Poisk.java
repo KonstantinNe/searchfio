@@ -1,22 +1,35 @@
 package ru.nemesh;
 
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 //import sun.security.ssl.BaseSSLSocketImpl;
 
-import javax.lang.model.util.Elements;
-import javax.swing.text.html.parser.Element;
 import java.io.*;
 import java.net.*;
 
 public class Poisk {
     public static String poiskfio(String a) throws Exception {
-        String google = "https://www.google.com/search?q=";
+      //  String google = "https://www.google.com/search?q=";
+        String vk = "https://vk.com/search?q=";
         String search = a;
-        String charset = "UTF-8";
+        //String charset = "UTF-8";
         String c = null;
         String result = null;
 
-        URL url = new URL("https://www.google.com/search?q=" + a);
+//        try {
+//            Document doc = Jsoup.connect("https://www.example.com/").get();
+//            Elements elements = doc.select("a");
+//            for(Element element : elements){
+//                System.out.println(element.absUrl("href"));
+//                list.add(element.absUrl("href"));
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        URL url = new URL("https://vk.com/search?q=" + a);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         URLConnection connection = url.openConnection();
@@ -34,12 +47,17 @@ public class Poisk {
         try {
             InputStream input = connection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+          //  Document document = Jsoup.connect("https://hh.ru/").get();
 
+            File file = new File("vk.html");
+            Document document = Jsoup.parse(file, "UTF-8", "vk.ru");
+            
             while (reader.ready()) {
 
-                c = reader.readLine();
-                result = String.valueOf(Check.getCheckfio(a,c));
-                if (result == String.valueOf(true));
+                result = reader.readLine();
+//                c = reader.readLine();
+//                result = String.valueOf(Check.getCheckfio(a,c));
+//                if (result == String.valueOf(true));
                 return result;
              //   return c;
 
